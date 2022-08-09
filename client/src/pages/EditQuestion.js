@@ -1,32 +1,49 @@
-import { useState } from "react";
-import { useHistory } from "react-router";
+import { useEffect, useState } from "react";
+import { useHistory, useParams } from "react-router";
 import styled from "styled-components";
 import ReactMarkdown from "react-markdown";
 import { Button, Error, FormField, Input, Label, Textarea } from "../styles";
 
-function NewRecipe({ user }) {
-  const [title, setTitle] = useState("My Awesome Recipe");
-  const [minutesToComplete, setMinutesToComplete] = useState("30");
-  const [instructions, setInstructions] = useState(`Here's how you make it.
-  
-## Ingredients
-
-- 1c Sugar
-- 1c Spice
-
-## Instructions
-
-**Mix** sugar and spice. _Bake_ for 30 minutes.
-  `);
+export default function EditRecipe({ user }) {
+  const [title, setTitle] = useState("");
+  const [minutesToComplete, setMinutesToComplete] = useState("");
+  const [instructions, setInstructions] = useState("");
   const [errors, setErrors] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const history = useHistory();
 
+  const { id } = useParams();
+
+  function fetchQuestion() {
+    setIsLoading(true);
+    fetch(`/recipes/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((r) => {
+        setIsLoading(false);
+        if (r.ok) {
+          console.log(r);
+          setTitle(r.title);
+          setMinutesToComplete(r.minutes_to_complete);
+          setInstructions(r.instructions);
+        } else {
+          r.json().then((err) => setErrors(err.errors));
+        }
+      });
+  }
+
+  useEffect(() => {
+    fetchQuestion();
+  }, [id]);
+
   function handleSubmit(e) {
     e.preventDefault();
     setIsLoading(true);
-    fetch("/recipes", {
-      method: "POST",
+    fetch(`/recipes/${id}`, {
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
@@ -48,7 +65,7 @@ function NewRecipe({ user }) {
   return (
     <Wrapper>
       <WrapperChild>
-        <h2>Create Recipe</h2>
+        <h2>Update Recipe</h2>
         <form onSubmit={handleSubmit}>
           <FormField>
             <Label htmlFor="title">Title</Label>
@@ -79,7 +96,7 @@ function NewRecipe({ user }) {
           </FormField>
           <FormField>
             <Button color="primary" type="submit">
-              {isLoading ? "Loading..." : "Submit Recipe"}
+              {isLoading ? "Loading..." : "Edit Recipe"}
             </Button>
           </FormField>
           <FormField>
@@ -113,5 +130,3 @@ const Wrapper = styled.section`
 const WrapperChild = styled.div`
   flex: 1;
 `;
-
-export default NewRecipe;

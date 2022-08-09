@@ -15,15 +15,28 @@ function NavBar({ user, setUser }) {
   return (
     <Wrapper>
       <Logo>
-        <Link to="/">Reciplease</Link>
+        <Link to="/recipes">Reciplease</Link>
       </Logo>
       <Nav>
-        <Button as={Link} to="/new">
-          New Recipe
-        </Button>
-        <Button variant="outline" onClick={handleLogoutClick}>
-          Logout
-        </Button>
+        {user ? (
+          <>
+            <Button as={Link} to="/new">
+              Ask question
+            </Button>
+            <Button variant="outline" onClick={handleLogoutClick}>
+              Logout
+            </Button>
+          </>
+        ) : (
+          <>
+            <Button as={Link} to="/signin">
+              Sign In
+            </Button>
+            <Button as={Link} to="/signup">
+              Sign Up
+            </Button>
+          </>
+        )}
       </Nav>
     </Wrapper>
   );
@@ -32,6 +45,7 @@ function NavBar({ user, setUser }) {
 const Wrapper = styled.header`
   display: flex;
   justify-content: center;
+  justify-content: space-between;
   align-items: center;
   padding: 8px;
 `;

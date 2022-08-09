@@ -1,7 +1,8 @@
 import React, { useState } from "react";
+import { Redirect } from "react-router-dom";
 import { Button, Error, Input, FormField, Label } from "../styles";
 
-function LoginForm({ onLogin }) {
+function LoginForm({ onLogin, user }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
@@ -26,8 +27,20 @@ function LoginForm({ onLogin }) {
     });
   }
 
+  if (user) return <Redirect to="/recipes" />;
+
   return (
-    <form onSubmit={handleSubmit}>
+    <div style={{
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      height: "80vh"
+    }}>
+    <form onSubmit={handleSubmit} style={{
+      display:"flex",
+      flexDirection: "column",
+      width: "35%"
+    }}>
       <FormField>
         <Label htmlFor="username">Username</Label>
         <Input
@@ -59,6 +72,7 @@ function LoginForm({ onLogin }) {
         ))}
       </FormField>
     </form>
+    </div>
   );
 }
 

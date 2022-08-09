@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import styled from "styled-components";
 import { Box, Button } from "../styles";
 
-function RecipeList() {
+function RecipeList({user}) {
   const [recipes, setRecipes] = useState([]);
 
   useEffect(() => {
@@ -13,6 +13,7 @@ function RecipeList() {
       .then(setRecipes);
   }, []);
 
+  if (!user) return <Redirect to="/" />;
   return (
     <Wrapper>
       {recipes.length > 0 ? (
@@ -26,6 +27,11 @@ function RecipeList() {
                 <cite>By {recipe.user.username}</cite>
               </p>
               <ReactMarkdown>{recipe.instructions}</ReactMarkdown>
+              <Button as={Link} to={`/recipes/${recipe.id}`}>Edit</Button>
+              <div>
+                <h5>Answers</h5>
+                <p>Some answer</p>
+              </div>
             </Box>
           </Recipe>
         ))

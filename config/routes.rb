@@ -4,5 +4,5 @@ Rails.application.routes.draw do
   get "/me", to: "users#show"
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
-  resources :recipes, only: [:index, :create]
+  resources :recipes, only: [:index, :create, :show, :update]
 end

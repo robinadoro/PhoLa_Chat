@@ -1,0 +1,73 @@
+import React from "react";
+import { Redirect } from "react-router-dom";
+import { Button } from "../styles";
+import "./home.css";
+
+export default function Home({ user }) {
+  if (user) return <Redirect to="/recipes" />;
+  return (
+    <>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          height: "77vh"
+        }}
+      >
+        <div
+          style={{
+            paddingLeft: "50px",
+          }}
+        >
+          <div>
+            <h2
+              style={{
+                fontSize: "60px",
+              }}
+            >
+              Identify A Problem,
+              <br /> consult from your peers
+            </h2>
+            <h5
+              style={{
+                fontSize: "25px",
+              }}
+            >
+              Understand the problem with your device,
+              <br /> get posible solutions before contacting a technician
+            </h5>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              marginLeft: "80px",
+              padding: "20px",
+            }}
+          >
+            <Button className="homeBtn">Get Started</Button>
+          </div>
+        </div>
+      </div>
+      <div style={{
+        height:"11vh",
+        display:"flex",
+        backgroundColor: "#2C2C2C",
+        color: "white",
+        alignItems: "center",
+        paddingLeft: "50px"
+      }}>
+        <h3>Talk to us</h3>
+      </div>
+      <div style={{
+        height:"5vh",
+        display:"flex",
+        color: "black",
+        alignItems: "center",
+        justifyContent:"center",
+        paddingLeft: "50px"
+      }}>
+        <h3>&copy; PhoLaChat 2022</h3>
+      </div>
+    </>
+  );
+}
