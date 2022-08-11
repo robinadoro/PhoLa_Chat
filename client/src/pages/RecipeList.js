@@ -2,7 +2,28 @@ import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { Link, Redirect } from "react-router-dom";
 import styled from "styled-components";
-import { Box, Button } from "../styles";
+import { Box,Button, Input, FormField, Label } from "../styles";
+
+function AnswerForm({question}){
+  const [answer, setAnswer] = useState("");
+  console.log(question)
+  return(
+    <FormField>
+      <Label htmlFor="answer">Submit your Answer</Label>
+      <Input
+        type="text"
+        id="answer"
+        autoComplete="off"
+        value={answer}
+        onChange={(e) => setAnswer(e.target.value)}
+      />
+      <div style={{margin:"20px 0px"}}>
+      <Button as={Link} to={`/answers`}>Post Answer</Button>
+      </div>
+     
+    </FormField>
+  )
+}
 
 function RecipeList({user}) {
   const [questions, setQuestions] = useState([]);
@@ -25,12 +46,16 @@ function RecipeList({user}) {
                 <cite>By {question.user.username}</cite>
               </p>
               <ReactMarkdown>{question.question}</ReactMarkdown>
-              <Button as={Link} to={`/questions/${question.id}`}>Edit</Button>
+              {user.id === question.user.id && <div style={{margin:"20px 0px"}}><Button as={Link} to={`/questions/${question.id}`}>Edit</Button></div>}
+              <AnswerForm question={question} />
+              
+              <hr style={{marginTop:"15px"}}/>
               <div>
                 <h5>Answers</h5>
                 <p>Some answer</p>
               </div>
             </Box>
+            
           </Recipe>
         ))
       ) : (
@@ -46,7 +71,7 @@ function RecipeList({user}) {
 }
 
 const Wrapper = styled.section`
-  max-width: 800px;
+  max-width: 600px;
   margin: 40px auto;
 `;
 

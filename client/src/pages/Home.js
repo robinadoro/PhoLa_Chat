@@ -1,7 +1,8 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect,Link } from "react-router-dom";
 import { Button } from "../styles";
 import "./home.css";
+
 
 export default function Home({ user }) {
   if (user) return <Redirect to="/questions" />;
@@ -44,7 +45,7 @@ export default function Home({ user }) {
               padding: "20px",
             }}
           >
-            <Button className="homeBtn">Get Started</Button>
+            <Button className="homeBtn" as={Link} to="/signup" >Get Started</Button>
           </div>
         </div>
       </div>

@@ -1,13 +1,11 @@
 import { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
 import styled from "styled-components";
-import ReactMarkdown from "react-markdown";
 import { Button, Error, FormField, Input, Label, Textarea } from "../styles";
 
 export default function EditRecipe({ user }) {
-  const [title, setTitle] = useState("");
-  const [minutesToComplete, setMinutesToComplete] = useState("");
-  const [instructions, setInstructions] = useState("");
+  const [topic, setTopic] = useState("");
+  const [question, setQuestion] = useState("");
   const [errors, setErrors] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const history = useHistory();
@@ -15,7 +13,7 @@ export default function EditRecipe({ user }) {
 
   function fetchQuestion() {
     setIsLoading(true);
-    fetch(`/recipes/${id}`, {
+    fetch(`/questions/${id}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -26,9 +24,8 @@ export default function EditRecipe({ user }) {
         if (r.ok) {
           
           r.json().then((r) => {
-            setTitle(r.title)
-            setMinutesToComplete(r.minutes_to_complete)
-            setInstructions(r.instructions)
+            setTopic(r.topic)
+            setQuestion(r.question)
           })
         } else {
           r.json().then((err) => setErrors(err.errors));
@@ -43,20 +40,19 @@ export default function EditRecipe({ user }) {
   function handleSubmit(e) {
     e.preventDefault();
     setIsLoading(true);
-    fetch(`/recipes/${id}`, {
+    fetch(`/questions/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        title,
-        instructions,
-        minutes_to_complete: minutesToComplete,
+        topic,
+        question
       }),
     }).then((r) => {
       setIsLoading(false);
       if (r.ok) {
-        history.push("/recipes");
+        history.push("/questions");
       } else {
         r.json().then((err) => setErrors(err.errors));
       }
@@ -66,38 +62,29 @@ export default function EditRecipe({ user }) {
   return (
     <Wrapper>
       <WrapperChild>
-        <h2>Update Recipe</h2>
+        <h2>Update Question</h2>
         <form onSubmit={handleSubmit}>
           <FormField>
-            <Label htmlFor="title">Title</Label>
+            <Label htmlFor="title">Topic</Label>
             <Input
               type="text"
               id="title"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
+              value={topic}
+              onChange={(e) => setTopic(e.target.value)}
             />
           </FormField>
           <FormField>
-            <Label htmlFor="minutesToComplete">Minutes to complete</Label>
-            <Input
-              type="number"
-              id="minutesToComplete"
-              value={minutesToComplete}
-              onChange={(e) => setMinutesToComplete(e.target.value)}
-            />
-          </FormField>
-          <FormField>
-            <Label htmlFor="instructions">Instructions</Label>
+            <Label htmlFor="instructions">Question</Label>
             <Textarea
               id="instructions"
-              rows="10"
-              value={instructions}
-              onChange={(e) => setInstructions(e.target.value)}
+              rows="5"
+              value={question}
+              onChange={(e) => setQuestion(e.target.value)}
             />
           </FormField>
           <FormField>
             <Button color="primary" type="submit">
-              {isLoading ? "Loading..." : "Edit Recipe"}
+              {isLoading ? "Loading..." : "Update Question"}
             </Button>
           </FormField>
           <FormField>
@@ -107,21 +94,12 @@ export default function EditRecipe({ user }) {
           </FormField>
         </form>
       </WrapperChild>
-      <WrapperChild>
-        <h1>{title}</h1>
-        <p>
-          <em>Time to Complete: {minutesToComplete} minutes</em>
-          &nbsp;·&nbsp;
-          <cite>By {user ? user.username : "Loading..."}</cite>
-        </p>
-        <ReactMarkdown>{instructions}</ReactMarkdown>
-      </WrapperChild>
     </Wrapper>
   );
 }
 
 const Wrapper = styled.section`
-  max-width: 1000px;
+  max-width: 500px;
   margin: 40px auto;
   padding: 16px;
   display: flex;
