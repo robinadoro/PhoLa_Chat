@@ -32,18 +32,19 @@ export default function AnswerForm({question,onAddAnswer}){
     return(
       <form onSubmit={handleSubmit}>
       <FormField>
-        <Label htmlFor="answer">Submit your Answer</Label>
+        <Label htmlFor="answer">Submit your Solution</Label>
         <Input
           type="text"
           id="answer"
           autoComplete="off"
           value={answer}
           onChange={(e) => setAnswer(e.target.value)}
+          placeholder="Enter your solution here..."
         />
         <div style={{margin:"20px 0px"}}>
         <FormField>
               <Button color="primary" type="submit">
-                {isLoading ? "Loading..." : "Post Answer"}
+                {isLoading ? "Loading..." : "Post Solution"}
               </Button>
             </FormField>
         </div>

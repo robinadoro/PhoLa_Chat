@@ -48,12 +48,13 @@ const Wrapper = styled.header`
   justify-content: space-between;
   align-items: center;
   padding: 8px;
+  background-color:lightgray;
 `;
 
 const Logo = styled.h1`
   font-family: "Permanent Marker", cursive;
-  font-size: 3rem;
-  color: deeppink;
+  font-size: 2rem;
+  color: orange;
   margin: 0;
   line-height: 1;
 

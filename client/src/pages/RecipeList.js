@@ -38,9 +38,9 @@ function RecipeList({user}) {
               
               <hr style={{marginTop:"15px"}}/>
               <div>
-                <h5>Answers</h5>
+                <h5>Solutions</h5>
                 {question.answers.length === 0 && <p>No answers yet</p>}
-                {question.answers.map(a => <ul style={{listStyle:"none"}}><li style={{backgroundColor:"grey",padding:"6px 8px",borderRadius:"5px"}}>{a.answer}</li></ul>)}
+                {question.answers.map(a => <ul style={{listStyle:"none"}}><li style={{backgroundColor:"lightgrey",padding:"6px 8px",borderRadius:"5px"}}>{a.answer}</li></ul>)}
               </div>
             </Box>
             
