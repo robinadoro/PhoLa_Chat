@@ -1,6 +1,6 @@
 class QuestionsController < ApplicationController
     def index
-        render json: Question.all, include: [:user]
+        render json: Question.all, include: [:user,:answers]
     end
 
     def create 
