@@ -2,28 +2,8 @@ import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { Link, Redirect } from "react-router-dom";
 import styled from "styled-components";
-import { Box,Button, Input, FormField, Label } from "../styles";
-
-function AnswerForm({question}){
-  const [answer, setAnswer] = useState("");
-  console.log(question)
-  return(
-    <FormField>
-      <Label htmlFor="answer">Submit your Answer</Label>
-      <Input
-        type="text"
-        id="answer"
-        autoComplete="off"
-        value={answer}
-        onChange={(e) => setAnswer(e.target.value)}
-      />
-      <div style={{margin:"20px 0px"}}>
-      <Button as={Link} to={`/answers`}>Post Answer</Button>
-      </div>
-     
-    </FormField>
-  )
-}
+import { Box,Button } from "../styles";
+import AnswerForm from "./AnswerForm";
 
 function RecipeList({user}) {
   const [questions, setQuestions] = useState([]);
@@ -34,6 +14,13 @@ function RecipeList({user}) {
       .then(setQuestions);
   }, []);
 
+  function handleAnswerAdd(){
+    fetch("/questions")
+      .then((r) => r.json())
+      .then(setQuestions);
+  }
+  
+
   if (!user) return <Redirect to="/" />;
   return (
     <Wrapper>
@@ -42,17 +29,18 @@ function RecipeList({user}) {
           <Recipe key={question.id}>
             <Box>
               <h2>{question.topic}</h2>
-              <p>
+              <span>
                 <cite>By {question.user.username}</cite>
-              </p>
+              </span>
               <ReactMarkdown>{question.question}</ReactMarkdown>
               {user.id === question.user.id && <div style={{margin:"20px 0px"}}><Button as={Link} to={`/questions/${question.id}`}>Edit</Button></div>}
-              <AnswerForm question={question} />
+              <AnswerForm question={question} onAddAnswer={handleAnswerAdd}/>
               
               <hr style={{marginTop:"15px"}}/>
               <div>
                 <h5>Answers</h5>
-                <p>Some answer</p>
+                {question.answers.length === 0 && <p>No answers yet</p>}
+                {question.answers.map(a => <ul style={{listStyle:"none"}}><li style={{backgroundColor:"grey",padding:"6px 8px",borderRadius:"5px"}}>{a.answer}</li></ul>)}
               </div>
             </Box>
             
