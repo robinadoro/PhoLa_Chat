@@ -29,13 +29,26 @@ ActiveRecord::Schema.define(version: 2022_08_11_080111) do
     t.index ["user_id"], name: "index_questions_on_user_id"
   end
 
+  create_table "recipes", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "title"
+    t.text "instructions"
+    t.integer "minutes_to_complete"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_recipes_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "password_digest"
+    t.string "image_url"
+    t.string "bio"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   add_foreign_key "answers", "questions"
   add_foreign_key "questions", "users"
+  add_foreign_key "recipes", "users"
 end

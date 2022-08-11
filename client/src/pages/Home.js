@@ -3,16 +3,19 @@ import { Redirect,Link } from "react-router-dom";
 import { Button } from "../styles";
 import "./home.css";
 
-
 export default function Home({ user }) {
   if (user) return <Redirect to="/questions" />;
   return (
     <>
-      <div
+    <div style={{display: "flex",
+    backgroundColor: "#C9E7F2"
+  }}>
+      <div  
         style={{
           display: "flex",
           alignItems: "center",
-          height: "77vh"
+          height: "77vh",
+          marginLeft: "30px"
         }}
       >
         <div
@@ -49,6 +52,27 @@ export default function Home({ user }) {
           </div>
         </div>
       </div>
+
+      <div style={{
+        paddingTop: "100px",
+        marginRight: "-50px"
+      }}>
+
+        <img src={process.env.PUBLIC_URL+"image1.png"} />
+
+      </div>
+
+      <div style={{
+        paddingTop: "60px"
+
+      }}>
+
+      <img src={process.env.PUBLIC_URL+"image2.png"} />
+        
+
+      </div>
+      </div>
+
       <div style={{
         height:"11vh",
         display:"flex",
@@ -65,7 +89,9 @@ export default function Home({ user }) {
         color: "black",
         alignItems: "center",
         justifyContent:"center",
-        paddingLeft: "50px"
+        paddingLeft: "50px",
+        backgroundColor: "#C9E7F2"
+
       }}>
         <h3>&copy; PhoLaChat 2022</h3>
       </div>
