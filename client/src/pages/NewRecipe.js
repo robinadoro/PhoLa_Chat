@@ -77,6 +77,7 @@ const Wrapper = styled.section`
   padding: 16px;
   display: flex;
   gap: 24px;
+
 `;
 
 const WrapperChild = styled.div`

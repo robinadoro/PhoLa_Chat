@@ -47,8 +47,8 @@ const Wrapper = styled.header`
   justify-content: center;
   justify-content: space-between;
   align-items: center;
-  padding: 8px;
-  background-color:lightgray;
+  padding: 20px;
+  background-color: #2C2C2C;
 `;
 
 const Logo = styled.h1`

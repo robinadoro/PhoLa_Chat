@@ -34,7 +34,9 @@ function LoginForm({ onLogin, user }) {
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
-      height: "80vh"
+      height: "95vh",
+      backgroundColor: "#C9E7F2"
+
     }}>
     <form onSubmit={handleSubmit} style={{
       display:"flex",
