@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Switch, Route } from "react-router-dom";
 import NavBar from "./NavBar";
-import RecipeList from "../pages/RecipeList";
+import RecipeList from "../pages/QuestionList";
 import NewRecipe from "../pages/NewRecipe";
 import Home from "../pages/Home";
 import SignUpForm from "./SignUpForm";
