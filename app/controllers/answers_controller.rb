@@ -1,6 +1,6 @@
 class AnswersController < ApplicationController
     def create 
-        answer = Answer.create!(question_params)
+        answer = Answer.create!(answer_params)
         render json: answer, status: :created
     end
 
