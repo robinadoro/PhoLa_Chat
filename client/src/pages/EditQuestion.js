@@ -11,7 +11,6 @@ export default function EditRecipe({ user }) {
   const [errors, setErrors] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const history = useHistory();
-
   const { id } = useParams();
 
   function fetchQuestion() {
@@ -25,10 +24,12 @@ export default function EditRecipe({ user }) {
       .then((r) => {
         setIsLoading(false);
         if (r.ok) {
-          console.log(r);
-          setTitle(r.title);
-          setMinutesToComplete(r.minutes_to_complete);
-          setInstructions(r.instructions);
+          
+          r.json().then((r) => {
+            setTitle(r.title)
+            setMinutesToComplete(r.minutes_to_complete)
+            setInstructions(r.instructions)
+          })
         } else {
           r.json().then((err) => setErrors(err.errors));
         }
