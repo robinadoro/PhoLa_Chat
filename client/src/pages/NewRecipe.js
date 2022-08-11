@@ -1,23 +1,11 @@
 import { useState } from "react";
 import { useHistory } from "react-router";
 import styled from "styled-components";
-import ReactMarkdown from "react-markdown";
 import { Button, Error, FormField, Input, Label, Textarea } from "../styles";
 
 function NewRecipe({ user }) {
-  const [title, setTitle] = useState("My Awesome Recipe");
-  const [minutesToComplete, setMinutesToComplete] = useState("30");
-  const [instructions, setInstructions] = useState(`Here's how you make it.
-  
-## Ingredients
-
-- 1c Sugar
-- 1c Spice
-
-## Instructions
-
-**Mix** sugar and spice. _Bake_ for 30 minutes.
-  `);
+  const [topic, setTopic] = useState("");
+  const [question, setQuestion] = useState("");
   const [errors, setErrors] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const history = useHistory();
@@ -25,20 +13,19 @@ function NewRecipe({ user }) {
   function handleSubmit(e) {
     e.preventDefault();
     setIsLoading(true);
-    fetch("/recipes", {
+    fetch("/questions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        title,
-        instructions,
-        minutes_to_complete: minutesToComplete,
+        topic,
+        question
       }),
     }).then((r) => {
       setIsLoading(false);
       if (r.ok) {
-        history.push("/recipes");
+        history.push("/questions");
       } else {
         r.json().then((err) => setErrors(err.errors));
       }
@@ -48,38 +35,29 @@ function NewRecipe({ user }) {
   return (
     <Wrapper>
       <WrapperChild>
-        <h2>Create Recipe</h2>
+        <h2>Post Question</h2>
         <form onSubmit={handleSubmit}>
           <FormField>
-            <Label htmlFor="title">Title</Label>
+            <Label htmlFor="title">Topic</Label>
             <Input
               type="text"
               id="title"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
+              value={topic}
+              onChange={(e) => setTopic(e.target.value)}
             />
           </FormField>
           <FormField>
-            <Label htmlFor="minutesToComplete">Minutes to complete</Label>
-            <Input
-              type="number"
-              id="minutesToComplete"
-              value={minutesToComplete}
-              onChange={(e) => setMinutesToComplete(e.target.value)}
-            />
-          </FormField>
-          <FormField>
-            <Label htmlFor="instructions">Instructions</Label>
+            <Label htmlFor="instructions">Question</Label>
             <Textarea
               id="instructions"
-              rows="10"
-              value={instructions}
-              onChange={(e) => setInstructions(e.target.value)}
+              rows="5"
+              value={question}
+              onChange={(e) => setQuestion(e.target.value)}
             />
           </FormField>
           <FormField>
             <Button color="primary" type="submit">
-              {isLoading ? "Loading..." : "Submit Recipe"}
+              {isLoading ? "Loading..." : "Submit"}
             </Button>
           </FormField>
           <FormField>
@@ -89,21 +67,12 @@ function NewRecipe({ user }) {
           </FormField>
         </form>
       </WrapperChild>
-      <WrapperChild>
-        <h1>{title}</h1>
-        <p>
-          <em>Time to Complete: {minutesToComplete} minutes</em>
-          &nbsp;·&nbsp;
-          <cite>By {user ? user.username : "Loading..."}</cite>
-        </p>
-        <ReactMarkdown>{instructions}</ReactMarkdown>
-      </WrapperChild>
     </Wrapper>
   );
 }
 
 const Wrapper = styled.section`
-  max-width: 1000px;
+  max-width: 500px;
   margin: 40px auto;
   padding: 16px;
   display: flex;

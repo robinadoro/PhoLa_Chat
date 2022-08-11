@@ -27,7 +27,7 @@ function LoginForm({ onLogin, user }) {
     });
   }
 
-  if (user) return <Redirect to="/recipes" />;
+  if (user) return <Redirect to="/questions" />;
 
   return (
     <div style={{

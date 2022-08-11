@@ -30,10 +30,10 @@ function App() {
           <Route path="/new">
             <NewRecipe user={user} />
           </Route>
-          <Route path="/recipes/:id">
+          <Route path="/questions/:id">
             <EditRecipe user={user} />
           </Route>
-          <Route path="/recipes">
+          <Route path="/questions">
             <RecipeList user={user} />
           </Route>
           <Route path="/signup">

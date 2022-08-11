@@ -6,8 +6,6 @@ function SignUpForm({ onLogin, user }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
-  const [bio, setBio] = useState("");
   const [errors, setErrors] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -24,8 +22,6 @@ function SignUpForm({ onLogin, user }) {
         username,
         password,
         password_confirmation: passwordConfirmation,
-        image_url: imageUrl,
-        bio,
       }),
     }).then((r) => {
       setIsLoading(false);
@@ -37,7 +33,7 @@ function SignUpForm({ onLogin, user }) {
     });
   }
 
-  if (user) return <Redirect to="/recipes" />;
+  if (user) return <Redirect to="/questions" />;
 
   return (
     <div style={{
@@ -79,24 +75,6 @@ function SignUpForm({ onLogin, user }) {
           value={passwordConfirmation}
           onChange={(e) => setPasswordConfirmation(e.target.value)}
           autoComplete="current-password"
-        />
-      </FormField>
-      <FormField>
-        <Label htmlFor="imageUrl">Profile Image</Label>
-        <Input
-          type="text"
-          id="imageUrl"
-          value={imageUrl}
-          onChange={(e) => setImageUrl(e.target.value)}
-        />
-      </FormField>
-      <FormField>
-        <Label htmlFor="bio">Bio</Label>
-        <Textarea
-          rows="3"
-          id="bio"
-          value={bio}
-          onChange={(e) => setBio(e.target.value)}
         />
       </FormField>
       <FormField>

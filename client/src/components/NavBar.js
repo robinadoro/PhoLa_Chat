@@ -15,7 +15,7 @@ function NavBar({ user, setUser }) {
   return (
     <Wrapper>
       <Logo>
-        <Link to="/recipes">Reciplease</Link>
+        <Link to="/questions">PhoLa-Chat</Link>
       </Logo>
       <Nav>
         {user ? (

@@ -4,7 +4,7 @@ import { Button } from "../styles";
 import "./home.css";
 
 export default function Home({ user }) {
-  if (user) return <Redirect to="/recipes" />;
+  if (user) return <Redirect to="/questions" />;
   return (
     <>
       <div

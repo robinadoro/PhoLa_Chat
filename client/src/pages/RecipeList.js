@@ -5,29 +5,27 @@ import styled from "styled-components";
 import { Box, Button } from "../styles";
 
 function RecipeList({user}) {
-  const [recipes, setRecipes] = useState([]);
+  const [questions, setQuestions] = useState([]);
 
   useEffect(() => {
-    fetch("/recipes")
+    fetch("/questions")
       .then((r) => r.json())
-      .then(setRecipes);
+      .then(setQuestions);
   }, []);
 
   if (!user) return <Redirect to="/" />;
   return (
     <Wrapper>
-      {recipes.length > 0 ? (
-        recipes.map((recipe) => (
-          <Recipe key={recipe.id}>
+      {questions.length > 0 ? (
+        questions.map((question) => (
+          <Recipe key={question.id}>
             <Box>
-              <h2>{recipe.title}</h2>
+              <h2>{question.topic}</h2>
               <p>
-                <em>Time to Complete: {recipe.minutes_to_complete} minutes</em>
-                &nbsp;·&nbsp;
-                <cite>By {recipe.user.username}</cite>
+                <cite>By {question.user.username}</cite>
               </p>
-              <ReactMarkdown>{recipe.instructions}</ReactMarkdown>
-              <Button as={Link} to={`/recipes/${recipe.id}`}>Edit</Button>
+              <ReactMarkdown>{question.question}</ReactMarkdown>
+              <Button as={Link} to={`/questions/${question.id}`}>Edit</Button>
               <div>
                 <h5>Answers</h5>
                 <p>Some answer</p>
@@ -37,9 +35,9 @@ function RecipeList({user}) {
         ))
       ) : (
         <>
-          <h2>No Recipes Found</h2>
+          <h2>No questions Found</h2>
           <Button as={Link} to="/new">
-            Make a New Recipe
+            Create a question
           </Button>
         </>
       )}
