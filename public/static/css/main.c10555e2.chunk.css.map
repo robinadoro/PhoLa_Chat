@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://src/pages/home.css"],"names":[],"mappings":"AAAA,SACI,2BAA4B,CAC5B,wBACJ","file":"main.c10555e2.chunk.css","sourcesContent":[".homeBtn{\n    padding: 20px 15px!important;\n    font-size: 20px!important;\n}"]}
