@@ -13,7 +13,7 @@ function SignUpForm({ onLogin, user }) {
     e.preventDefault();
     setErrors([]);
     setIsLoading(true);
-    fetch("/signup", {
+    fetch("https://some-phola.herokuapp.com/api/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

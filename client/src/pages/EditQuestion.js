@@ -13,7 +13,7 @@ export default function EditRecipe({ user }) {
 
   function fetchQuestion() {
     setIsLoading(true);
-    fetch(`/questions/${id}`, {
+    fetch(`https://some-phola.herokuapp.com/api/questions/${id}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -40,7 +40,7 @@ export default function EditRecipe({ user }) {
   function handleSubmit(e) {
     e.preventDefault();
     setIsLoading(true);
-    fetch(`/questions/${id}`, {
+    fetch(`https://some-phola.herokuapp.com/api/questions/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

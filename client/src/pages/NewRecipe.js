@@ -13,7 +13,7 @@ function NewRecipe({ user }) {
   function handleSubmit(e) {
     e.preventDefault();
     setIsLoading(true);
-    fetch("/questions", {
+    fetch("https://some-phola.herokuapp.com/api/questions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

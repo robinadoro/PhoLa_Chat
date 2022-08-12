@@ -8,7 +8,7 @@ export default function AnswerForm({question,onAddAnswer}){
     function handleSubmit(e) {
       e.preventDefault();
       setIsLoading(true);
-      fetch("/answers", {
+      fetch("https://some-phola.herokuapp.com/api/answers", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

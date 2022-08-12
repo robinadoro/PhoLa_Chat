@@ -9,13 +9,13 @@ function RecipeList({user}) {
   const [questions, setQuestions] = useState([]);
 
   useEffect(() => {
-    fetch("/questions")
+    fetch("https://some-phola.herokuapp.com/api/questions")
       .then((r) => r.json())
       .then(setQuestions);
   }, []);
 
   function handleAnswerAdd(){
-    fetch("/questions")
+    fetch("https://some-phola.herokuapp.com/api/questions")
       .then((r) => r.json())
       .then(setQuestions);
   }
