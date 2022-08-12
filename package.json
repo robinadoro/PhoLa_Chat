@@ -1,5 +1,5 @@
 {
-  "name": "phoLa-Chat",
+  "name": "pholaChat",
   "description": "Build scripts for Heroku",
   "engines": {
     "node": "16.x"
