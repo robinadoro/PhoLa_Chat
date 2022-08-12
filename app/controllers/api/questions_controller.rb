@@ -1,4 +1,4 @@
-class QuestionsController < ApplicationController
+class Api::QuestionsController < ApplicationController
     def index
         render json: Question.all, include: [:user,:answers]
     end
