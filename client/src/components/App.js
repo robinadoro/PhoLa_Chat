@@ -33,7 +33,7 @@ function App() {
           <Route path="/questions/:id">
             <EditRecipe user={user} />
           </Route>
-          <Route path="/questions">
+          <Route path="/api/questions">
             <RecipeList user={user} />
           </Route>
           <Route path="/signup">
