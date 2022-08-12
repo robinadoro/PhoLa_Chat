@@ -24,7 +24,7 @@ function App() {
       <NavBar user={user} setUser={setUser} />
       <main>
         <Switch>
-        <Route exact path="/">
+        <Route exact path="/api/">
             <Home user={user} />
           </Route>
           <Route path="/new">
