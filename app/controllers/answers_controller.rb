@@ -1,4 +1,4 @@
-class Api::AnswersController < ApplicationController
+class AnswersController < ApplicationController
     def create 
         answer = Answer.create!(answer_params)
         render json: answer, status: :created

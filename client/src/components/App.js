@@ -24,7 +24,7 @@ function App() {
       <NavBar user={user} setUser={setUser} />
       <main>
         <Switch>
-        <Route exact path="/api/">
+        <Route exact path="/">
             <Home user={user} />
           </Route>
           <Route path="/new">
@@ -33,7 +33,7 @@ function App() {
           <Route path="/questions/:id">
             <EditRecipe user={user} />
           </Route>
-          <Route path="/api/questions">
+          <Route path="/questions">
             <RecipeList user={user} />
           </Route>
           <Route path="/signup">
